@@ -16,8 +16,6 @@ open class Rect(var x: Int, var y: Int, var width: Int, var height: Int) : Movab
     override fun resize(zoom: Int) {
         width *= zoom
         height *= zoom
-
-        move(-width/2, -height/2)
     }
 
     override fun rotate(direction: RotateDirection, centerX: Int, centerY: Int) {

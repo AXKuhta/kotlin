@@ -15,8 +15,6 @@ class Circle(var x: Int, var y: Int, var r:Int) : Movable, Figure(0), Transformi
     // The rect will only ever grow
     override fun resize(zoom: Int) {
         r *= zoom
-
-        move(-r/2, -r/2)
     }
 
     override fun rotate(direction: RotateDirection, centerX: Int, centerY: Int) {
