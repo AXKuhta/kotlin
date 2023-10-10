@@ -8,6 +8,10 @@ fun test_rect() {
     x.rotate(RotateDirection.Clockwise, 3, -3)
     x.rotate(RotateDirection.Clockwise, 3, -3)
     print("Rect position 2: ${x}\n")
+    x.move(1, 1);
+    print("Rect move(1, 1): ${x}\n")
+    x.resize(2)
+    print("Rect resize(2): ${x}\n")
 }
 
 fun test_square() {
@@ -20,6 +24,10 @@ fun test_square() {
     x.rotate(RotateDirection.Clockwise, 3, -3)
     x.rotate(RotateDirection.Clockwise, 3, -3)
     print("Square position 2: ${x}\n")
+    x.move(1, 1);
+    print("Square move(1, 1): ${x}\n")
+    x.resize(2)
+    print("Square resize(2): ${x}\n")
 }
 
 fun test_circle() {
@@ -32,6 +40,10 @@ fun test_circle() {
     x.rotate(RotateDirection.Clockwise, 3, -3)
     x.rotate(RotateDirection.Clockwise, 3, -3)
     print("Circle position 2: ${x}\n")
+    x.move(1, 1);
+    print("Circle move(1, 1): ${x}\n")
+    x.resize(2)
+    print("Circle resize(2): ${x}\n")
 }
 
 fun main(args: Array<String>) {
