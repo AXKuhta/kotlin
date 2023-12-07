@@ -9,6 +9,7 @@ import kotlinx.serialization.json.Json
 import app.softwork.serialization.csv.*
 import kotlinx.serialization.encodeToString
 import java.io.File
+import java.text.SimpleDateFormat
 
 fun androidApi(version: Double):Int {
     return when (version) {
@@ -60,6 +61,9 @@ data class AppCSVEntry(
     val AndroidVer: String
 ) {
     fun toSerializable():AppJSONEntry {
+        val timefmt = SimpleDateFormat("MMMM d, yyyy")
+        val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
+
         return AppJSONEntry(
             this.App,
             this.Category,
@@ -70,7 +74,7 @@ data class AppCSVEntry(
             this.Type != "Free",
             this.ContentRating,
             this.Genres,
-            this.LastUpdated,
+            sdf.format(timefmt.parse(this.LastUpdated)),
             this.CurrentVer,
             androidApi( if (this.AndroidVer != "Varies with device") this.AndroidVer.replace(" and up", "").take(3).toDouble() else -1.0 )
         )
