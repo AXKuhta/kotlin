@@ -4,10 +4,41 @@
 package csvtojson
 
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.Json
 import app.softwork.serialization.csv.*
 import kotlinx.serialization.encodeToString
+import java.io.File
 
-fun main() {
-    println(CSVFormat)
+// App,Category,Rating,Reviews,Size,Installs,Type,Price,Content Rating,Genres,Last Updated,Current Ver,Android Ver
+// Photo Editor & Candy Camera & Grid & ScrapBook,ART_AND_DESIGN,4.1,159,19M,"10,000+",Free,0,Everyone,Art & Design,"January 7, 2018",1.0.0,4.0.3 and up
+
+@Serializable
+data class CSVContents(
+    val App: String?,
+    val Category: String?,
+    val Rating: String?,
+    val Reviews: String?,
+    val Size: String?,
+    val Installs: String?,
+    val Type: String?,
+    val Price: String?,
+    val ContentRating: String?,
+    val Genres: String?,
+    val LastUpdated: String?,
+    val CurrentVer: String?,
+    val AndroidVer: String?
+)
+
+fun main(args: Array<String>) {
+    if (args.size != 1) {
+        println("Usage: ./app file.csv")
+        return
+    }
+
+    val raw_csv = File(args[0]).readText()
+    val result = CSVFormat.decodeFromString(ListSerializer(CSVContents.serializer()), raw_csv)
+
+    println(args.size)
+    println(result)
 }
