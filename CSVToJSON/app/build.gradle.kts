@@ -20,6 +20,10 @@ repositories {
 
 dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
+    implementation("app.softwork:kotlinx-serialization-csv:0.0.15")
+    implementation("app.softwork:kotlinx-serialization-flf:0.0.15")
+    //implementation("app.softwork:kotlinx-serialization-csv:LATEST")
+    //implementation("app.softwork:kotlinx-serialization-flf:LATEST")
 
     // Use the Kotlin JUnit 5 integration.
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")

@@ -3,13 +3,11 @@
  */
 package csvtojson
 
-class App {
-    val greeting: String
-        get() {
-            return "Hello World!"
-        }
-}
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.Json
+import app.softwork.serialization.csv.*
+import kotlinx.serialization.encodeToString
 
 fun main() {
-    println(App().greeting)
+    println(CSVFormat)
 }
