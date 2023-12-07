@@ -60,7 +60,7 @@ fun parseCsv(csv:String):MutableList<AppCSVEntry> {
 
     for (token in log) {
         if (token.type == "sep") {
-            fields.add(v)
+            fields.add(v.trim())
             v = ""
 
             if (token.value == "\n") {
