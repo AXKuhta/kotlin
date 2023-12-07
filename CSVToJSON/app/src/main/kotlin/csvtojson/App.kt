@@ -40,5 +40,8 @@ fun main(args: Array<String>) {
     val result = CSVFormat.decodeFromString(ListSerializer(CSVContents.serializer()), raw_csv)
 
     println(args.size)
-    println(result)
+    //println(Token("aa", "asdasd\"\"\"").tailQuots())
+
+    parseCsv(raw_csv)
+    //parseCsv("aaa,bbb,,ccc\n")
 }
