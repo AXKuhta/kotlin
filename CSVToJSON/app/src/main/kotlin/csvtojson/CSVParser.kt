@@ -24,6 +24,7 @@ fun parseCsv(csv:String):MutableList<AppCSVEntry> {
         when (last.type) {
             "quotedstring" -> {
                 if (letter in ",\n" && last.tailQuots() % 2 == 1) {
+                    last.value = last.value.dropLast(1)
                     log.add( Token("sep", str_letter) )
                 } else {
                     last.value += str_letter
