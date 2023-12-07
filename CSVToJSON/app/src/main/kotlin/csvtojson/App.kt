@@ -14,7 +14,7 @@ import java.io.File
 // Photo Editor & Candy Camera & Grid & ScrapBook,ART_AND_DESIGN,4.1,159,19M,"10,000+",Free,0,Everyone,Art & Design,"January 7, 2018",1.0.0,4.0.3 and up
 
 @Serializable
-data class CSVContents(
+data class AppCSVEntry(
     val App: String?,
     val Category: String?,
     val Rating: String?,
@@ -37,11 +37,19 @@ fun main(args: Array<String>) {
     }
 
     val raw_csv = File(args[0]).readText()
-    val result = CSVFormat.decodeFromString(ListSerializer(CSVContents.serializer()), raw_csv)
+    //val result = CSVFormat.decodeFromString(ListSerializer(AppCSVEntry.serializer()), raw_csv)
+    val result = parseCsv(raw_csv)
 
-    println(args.size)
+    val json = Json.encodeToString(result)
+
+    println("${result.size} entries loaded")
+    println("${json.length} json bytes")
+
+    File(args[0] + ".json").writeText(json)
+
+    //println(args.size)
     //println(Token("aa", "asdasd\"\"\"").tailQuots())
 
-    parseCsv(raw_csv)
+    
     //parseCsv("aaa,bbb,,ccc\n")
 }

@@ -14,7 +14,7 @@ data class Token(val type:String = "", var value:String = "") {
     }
 }
 
-fun parseCsv(csv:String) {
+fun parseCsv(csv:String):MutableList<AppCSVEntry> {
     val log = mutableListOf(Token("sep"))
 
     for (letter in csv) {
@@ -53,6 +53,7 @@ fun parseCsv(csv:String) {
 
     log.remove(log.first())
 
+    var entries = mutableListOf<AppCSVEntry>()
     var fields = mutableListOf<String>()
     var v:String = ""
 
@@ -62,11 +63,34 @@ fun parseCsv(csv:String) {
             v = ""
 
             if (token.value == "\n") {
-                println(fields)
+                if (fields.size != 13) {
+                    println("REJECTING ${fields.size} fields line: ${fields}")
+                } else {
+                    val entry = AppCSVEntry(
+                        fields[0],
+                        fields[1],
+                        fields[2],
+                        fields[3],
+                        fields[4],
+                        fields[5],
+                        fields[6],
+                        fields[7],
+                        fields[8],
+                        fields[9],
+                        fields[10],
+                        fields[11],
+                        fields[12],
+                    )
+
+                    entries.add(entry)
+                }
+
                 fields.clear()
             }
         } else {
             v = token.value
         }
     }
+
+    return entries
 }
