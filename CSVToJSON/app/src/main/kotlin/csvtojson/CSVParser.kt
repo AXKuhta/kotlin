@@ -58,40 +58,48 @@ fun parseCsv(csv:String):MutableList<AppCSVEntry> {
     var fields = mutableListOf<String>()
     var v:String = ""
 
+    fun popFields() {
+        if (fields.size != 13) {
+            println("REJECTING ${fields.size} fields line: ${fields}")
+        } else {
+            val entry = AppCSVEntry(
+                fields[0],
+                fields[1],
+                fields[2],
+                fields[3],
+                fields[4],
+                fields[5],
+                fields[6],
+                fields[7],
+                fields[8],
+                fields[9],
+                fields[10],
+                fields[11],
+                fields[12],
+            )
+
+            entries.add(entry)
+        }
+
+        fields.clear()
+    }
+
+    log.add( Token("sep") )
+
     for (token in log) {
         if (token.type == "sep") {
             fields.add(v.trim())
             v = ""
 
             if (token.value == "\n") {
-                if (fields.size != 13) {
-                    println("REJECTING ${fields.size} fields line: ${fields}")
-                } else {
-                    val entry = AppCSVEntry(
-                        fields[0],
-                        fields[1],
-                        fields[2],
-                        fields[3],
-                        fields[4],
-                        fields[5],
-                        fields[6],
-                        fields[7],
-                        fields[8],
-                        fields[9],
-                        fields[10],
-                        fields[11],
-                        fields[12],
-                    )
-
-                    entries.add(entry)
-                }
-
-                fields.clear()
+                popFields()
             }
         } else {
             v = token.value
         }
     }
+
+    popFields()
 
     return entries
 }
